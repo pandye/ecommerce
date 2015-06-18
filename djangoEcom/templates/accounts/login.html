@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block title %}home{% endblock %}
+{% block content %}
+
+<form class="form" method="post" action="">
+    <div class="col-md-12">
+        <div class="col-md-6">{% csrf_token %}
+            {{ form|bootstrap }}
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            New user?<a href="{% url 'register' %}">Click here to register</a>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

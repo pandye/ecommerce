@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
+    <link href="{% static "bootstrap-3.3.4-dist/css/bootstrap.min.css"%}" rel="stylesheet" media="screen">
+    <link href="{% static "bootstrap-3.3.4-dist/css/font-awesome.min.css"%}" rel="stylesheet" media="screen">
+    <link href="{% static "bootstrap-3.3.4-dist/css/prettyPhoto.css"%}" rel="stylesheet" media="screen">
+    <link href="{% static "bootstrap-3.3.4-dist/css/price-range.css"%}" rel="stylesheet" media="screen">
+    <link href="{% static "bootstrap-3.3.4-dist/css/animate.css"%}" rel="stylesheet" media="screen">
+    <link href="{% static "bootstrap-3.3.4-dist/css/main.css"%}" rel="stylesheet" media="screen">
+    <link href="{% static "bootstrap-3.3.4-dist/css/responsive.css"%}" rel="stylesheet" media="screen">
+</head>
+
+<body>
+
+    <div class="col-lg-12">
+        <div class="row">
+            {% include "header.html" %}
+        </div>
+    </div>
+
+    <div class="col-lg-12 pull-left" style="margin-top: 75px;">
+        <div class= "container">
+            <div class="row">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12" style="margin-top: 75px">
+        <div class="row">
+            {% include "footer.html" %}
+        </div>
+    </div>
+
+    <script src= "{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
+    <script src= "{% static "bootstrap-3.3.4-dist/js/jquery.js" %}"></script>
+    <script src= "{% static "bootstrap-3.3.4-dist/js/price-range.js" %}"></script>
+    <script src= "{% static "bootstrap-3.3.4-dist/js/jquery.scrollUp.min.js" %}"></script>
+    <script src= "{% static "bootstrap-3.3.4-dist/js/jquery.prettyPhoto.js" %}"></script>
+    <script src= "{% static "bootstrap-3.3.4-dist/js/main.js" %}"></script>
+
+    <script type="text/javascript">
+          $(document).ready(function(){
+                  {% block jquery %}{% endblock jquery%}           
+              });
+    </script>
+
+</body>
+</html>

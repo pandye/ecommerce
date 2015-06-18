@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block content %}
+{% if form.errors %}
+    <p style="color: red;">
+        Please correct the error{{ form.errors|pluralize }} below.
+    </p>
+{% endif %}
+<h1>Register</h1>
+<form class="form" method="post" action="">
+    <div class="col-md-12">
+        <div class="col-md-6">{% csrf_token %}
+            {{ form|bootstrap }}
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary">Sign up</button>
+            Already registered?<a href="{% url 'login' %}">Sign in here.</a>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

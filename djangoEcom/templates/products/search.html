@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block content %}
+    <h1>Search for {{ query }}</h1>
+
+{% for product in products %}
+        <div class='col-md-4'>
+            <div class="thumbnail">
+                {% if product.productimage_set.all %}
+                    {% for item in product.productimage_set.all %}
+                    {% if item.featured %}
+                        {{ item.image }}
+                        <div style="width:100px;margin:0 auto;">
+                            <a href='{{ product.get_absolute_url }}'>
+                                <div class='background_img_thumb' style="height:200px;
+                                        background-image: url('{{ MEDIA_URL }}{{ item.image }}');">
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <a href='{{ product.get_absolute_url }}'>
+                        <div class='background_img_thumb' style="height:200px;"></div>
+                    </a>
+                {% endif %}
+                <div class="caption">
+                    <a href='{{ product.get_absolute_url }}'> <h3>{{ product.title }}</h3></a>
+                    <p>{{ product.description|truncatewords:15}}</p>
+                    <p>
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
+                        <a href="#" class="btn btn-default" role="button">Button</a>
+                    </p>
+                </div>
+        </div>
+</div>
+    {% endfor %}
+{% endblock %}
