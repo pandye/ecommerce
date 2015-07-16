@@ -1,12 +1,33 @@
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect
 from accounts.forms import UserForm, LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        form = UserForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.set_password(user.password)
+            user.save()
+            registered = True
+            messages.success(request, "Thank you for registering.")
+            return redirect('login')
+        else:
+            form.errors()
+    else:
+        form = UserForm()
+    return render(request, 'accounts/register.html', {'form': form})
 
 
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        if not request.POST.get('remember_me'):
+            request.session.set_expiry(0)
         username = request.POST.get('username')
         password = request.POST.get('password')
         print username, password
@@ -15,30 +36,19 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('index'))
+                messages.success(request, "You are successfully logged in.")
+                return redirect('index')
             else:
-                return HttpResponse('Your account is disabled.')
+                messages.error(request, "Your account is disabled.")
         else:
-            return HttpResponse('Invalid login details.')
+            messages.error(request, "Invalid login details.")
     else:
         form = LoginForm()
-
-    template = 'accounts/login.html'
-    return render(request, template, {'form': form})
+    return render(request, 'accounts/login.html', {'form': form})
 
 
-def register(request):
-    registered = False
-    if request.method == 'POST':
-        form = UserForm(data = request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.save()
-            registered = True
-        else:
-            form.errors
-    else:
-        form = UserForm()
-
-    template = 'accounts/register.html'
-    return render(request, template, {'form': form})
+@login_required()
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You are successfully Signed out.")
+    return redirect('login')

@@ -36,10 +36,10 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
+								<li><a href=""><i class="fa fa-user"></i>Account</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="{% url 'cart' %}" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="{% url 'cart' %}">Cart <span class='badge badge-info cart_badge_info'>{{ request.session.cart_items }}</span></a></li>
 								<li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
@@ -63,23 +63,31 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="{% url 'index' %}">Home</a></li>
+                                <li class="dropdown"><a href="#">Acccount<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% if request.user.is_authenticated %}
+                                        <li><a href="{% url 'logout' %}">Logout ({{ request.user }}) </a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'login' %}">Login</a></li>
+                                    {% endif %}
+                                        <li><a href="{% url 'register' %}">Register</a></li>
+                                    </ul>
+                                </li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="{% url 'products' %}">Products</a></li>
-										<li><a href="#">Product Details</a></li>
-										<li><a href="{% url 'checkout' %}">Checkout</a></li>
-										<li><a href="{% url 'cart' %}" class="active">Cart</a></li>
-										<li><a href="{% url 'login' %}">Login</a></li>
+                                        <li><a href="{% url 'cart' %}">Cart</a></li>
+                                        <li><a href="{% url 'checkout' %}">Checkout</a></li>
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="#">Blog List</a></li>
-										<li><a href="#">Blog Single</a></li>
+                                        <li><a href="{% url 'blog' %}">Blog List</a></li>
+										<li><a href="{% url 'add_post' %}">New Post</a></li>
                                     </ul>
-                                </li> 
+                                </li>
 								<li><a href="#">404</a></li>
-								<li><a href="{% url 'contact' %}">Contact</a></li>
+								<li><a href="{% url 'contact_us' %}">Contact</a></li>
 							</ul>
 						</div>
 					</div>

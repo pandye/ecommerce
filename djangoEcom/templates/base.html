@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <title>
@@ -23,6 +23,28 @@
         </div>
     </div>
 
+    <div class="col-lg-6">
+        {% if messages %}
+            <ul class="messages">
+                {% for msg in messages %}
+                    <li>
+                        {% if "error" in msg.level_tag%}
+                            <div class="alert alert-danger" role="alert">
+                                <a class="close" data-dismiss="alert" href="{{ request.path }}">&times;</a>
+                                {{ msg.message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{msg.level_tag}}" role="alert">
+                                <a class="close" data-dismiss="alert" href="{{ currentUrl }}">&times;</a>
+                                {{ msg.message}}
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
     <div class="col-lg-12 pull-left" style="margin-top: 75px;">
         <div class= "container">
             <div class="row">
@@ -38,18 +60,24 @@
         </div>
     </div>
 
-    <script src= "{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
     <script src= "{% static "bootstrap-3.3.4-dist/js/jquery.js" %}"></script>
     <script src= "{% static "bootstrap-3.3.4-dist/js/price-range.js" %}"></script>
     <script src= "{% static "bootstrap-3.3.4-dist/js/jquery.scrollUp.min.js" %}"></script>
+    <script src= "{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
     <script src= "{% static "bootstrap-3.3.4-dist/js/jquery.prettyPhoto.js" %}"></script>
     <script src= "{% static "bootstrap-3.3.4-dist/js/main.js" %}"></script>
 
-    <script type="text/javascript">
-          $(document).ready(function(){
-                  {% block jquery %}{% endblock jquery%}           
-              });
-    </script>
+
+   <script type="text/javascript">
+      $(document).ready(function(){
+              {% block jquery %}
+              {% endblock jquery%}
+          });
+   </script>
 
 </body>
 </html>

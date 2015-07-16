@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Post{% endblock %}
+{% block content %}
+
+<div class="col-sm-12">
+    <div class="blog-post-area">
+        <div class="single-blog-post">
+            <h3>{{ post.title }}</h3>
+            <div class="post-meta">
+                <ul>
+                    <li><i class="fa fa-user"></i>{{ post.author }}</li>
+                    <li><i class="fa fa-calendar"></i>{{ post.published_date }}</li>
+                </ul>
+            </div>
+            <a href="">
+                <img src="{{ MEDIA_URL }}{{ post.image }}" alt="">
+            </a>
+            <p>{{ post.text|linebreaks }}</p>
+            <a class="btn btn-primary" href="{% url 'edit_post' post.id %}">Edit</a>
+            <a class="btn btn-primary" href="{% url 'delete_post' post.id %}">Delete</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

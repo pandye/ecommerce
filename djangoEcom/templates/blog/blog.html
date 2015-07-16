@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+
+<div class="col-sm-12">
+    <div class="blog-post-area">
+        {% for post in posts %}
+        <div class="single-blog-post">
+            <h2><a href="{% url 'post' post.id %}">{{ post.title }}</a></h2>
+            <div class="post-meta">
+                <ul>
+                    <li><i class="fa fa-user"></i>{{ post.author }}</li>
+                    <li><i class="fa fa-calendar"></i>{{ post.published_date }}</li>
+                </ul>
+            </div>
+            <div>
+                {% if post.image %}
+                    <a href="">
+                        <img src="{{ MEDIA_URL }}{{ post.image }}" alt="">
+                    </a>
+                {% endif %}
+            </div>
+            <p>{{ post.text|linebreaks }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

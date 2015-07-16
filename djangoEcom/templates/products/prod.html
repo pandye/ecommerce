@@ -2,27 +2,28 @@
 {% block title %}product{% endblock %}
 
 {% block jquery %}
-    $(".cart").click(function(e){
-    e.preventDefault();
-    $id_slug = $('#id_slug').val();
-    $id_qty = $('#id_qty').val();
-
+    $(".add_to_cart_btn").click(function(e){
+        e.preventDefault();
         $.ajax({
-            type: 'POST',
+
             url: '{% url 'add_ajax' %}',
-            data: {
+            type: 'POST',
+            data:{
                 csrfmiddlewaretoken: '{{ csrf_token }}',
-                product_slug: $id_slug,
-                product_quantity: $id_qty,
+                slug: $('#id_slug').val(),
+                qty: $('#id_quantity').val(),
             },
             dataType: 'json',
+
             success: function(data){
-                $(".cart").val('Cart Updated').addClass('btn-success');
-                $('.cart_badge_info').text(data);
+                $(".cart_badge_info").text(data);
+                $(".add_to_cart_btn").delay(250).fadeIn("slow").delay(100).fadeOut("slow");
+
             },
-            error: function(rs, e){
+
+            error: function(e){
                 alert('Some error occured');
-            },
+            }
         });
     });
 {% endblock %}
@@ -38,11 +39,9 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-                                {% if product.productimage_set.all %}
-                                    {% for img in product.productimage_set.all %}
-                                        <img src='{{ MEDIA_URL }}{{ img.image }}'>
-                                    {% endfor %}
-                                {% endif %}
+                                {% for img in product.productimage_set.all %}
+                                    <img src='{{ MEDIA_URL }}{{ img.image }}'>
+                                {% endfor %}
 								<h3>ZOOM</h3>
 							</div>
 						</div>
@@ -52,16 +51,14 @@
 								<span>
 									<span>{{ product.price }}</span>
 
-                                    <form method="post" action="{% url 'add' product.slug %}">{% csrf_token %}
+                                    <form class="cartForm" method="post" action="{% url "prod" product.slug %}">{% csrf_token %}
                                         <label>Quantity:</label>
 
-                                        <input type='hidden' name='slug' id='id_slug' value='{{product.slug }}' />
+                                        <input type='hidden' name='slug' id='id_slug' value='{{product.slug }}'/>
 
-                                        <input name='qty' type='number' value='1'/>
+                                        <input type='number' name='qty' id='id_quantity' value='1' placeholder='Qty' required='required'/>
 
-                                        <button type="submit" class="btn btn-default cart">
-										    <i class="fa fa-shopping-cart"></i>Add to cart
-									    </button>
+                                        <button type="submit" class="btn btn-primary add_to_cart_btn"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 
                                         {% if product.variation_set.all %}
 
@@ -82,7 +79,6 @@
                                             {% endif %}
 
                                         {% endif %}
-
                                     </form>
 
 								</span>

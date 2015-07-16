@@ -108,12 +108,10 @@
 				<div class="col-sm-6">
 					<div class="total_area">
                             <ul>
-                                {% for item in cart.cartitem_set.all %}
-                                    <li>Cart Sub Total <span>{{ item.line_total }}</span></li>
-                                    <li>Eco Tax <span>{{ 0 }}</span></li>
-                                    <li>Shipping Cost <span>Free</span></li>
-                                    <li>Total <span>{{ item.line_total }}</span></li>
-                                {% endfor %}
+                                <li>Cart Sub Total <span>{{ cart.total }}</span></li>
+                                <li>Eco Tax <span>{{ 0 }}</span></li>
+                                <li>Shipping Cost <span>Free</span></li>
+                                <li>Total <span>{{ cart.total }}</span></li>
                             </ul>
                         <a class="btn btn-default update" href="">Update</a>
 							<a class="btn btn-default check_out" href="">Check Out</a>

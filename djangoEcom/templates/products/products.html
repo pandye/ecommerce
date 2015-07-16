@@ -20,27 +20,17 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                {% if product.productimage_set.all %}
-                                                    {% for img in product.productimage_set.all %}
-                                                        <img src='{{ MEDIA_URL }}{{ img.image }}'>
-                                                    {% endfor %}
-                                                {% endif %}
+                                                {% for img in product.productimage_set.all %}
+                                                    <img src='{{ MEDIA_URL }}{{ img.image }}'>
+                                                {% endfor %}
                                                 <h2>{{ product.price }}</h2>
                                                 <p>{{ product.title }}</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
                                                     <h2>{{ product.price }}</h2>
                                                     <p>{{ product.title }}</p>
                                                     <p><a href="{% url 'prod' product.slug %}" class="btn btn-default">View</a></p>
-
-                                                    <form method="post" action="{% url 'products' %}">{% csrf_token %}
-                                                        <button type="submit" class="btn btn-default cart">
-										                    <i class="fa fa-shopping-cart"></i>Add to cart
-									                    </button>
-                                                    </form>
-
                                                 </div>
                                             </div>
                                         </div>

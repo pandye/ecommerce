@@ -17,9 +17,7 @@ class Category(models.Model):
 class Products(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField(null=True, blank=True)
-
     category = models.ManyToManyField(Category, null=True, blank=True)
-
     price = models.DecimalField(decimal_places=2, max_digits=65)
     sale_price = models.DecimalField(decimal_places=2, max_digits=65)
     slug = models.SlugField(unique=True)

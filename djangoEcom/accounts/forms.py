@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from accounts.models import Address
+from django.core.validators import EmailValidator
+
 
 class LoginForm(forms.Form):
     username = forms.CharField()

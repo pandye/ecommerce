@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from products.models import Products, ProductImage
 
 
@@ -14,7 +14,7 @@ def products(request):
 
 
 def prod(request, slug):
-    product = Products.objects.get(slug=slug)
+    product = get_object_or_404(Products, slug=slug)
     images = ProductImage.objects.filter(product=product)
     template = 'products/prod.html'
     context = {'product': product, 'images': images}
