@@ -44,6 +44,9 @@ urlpatterns = [
     url(r'^blog/edit_post/(?P<id>[\w-]+)/$', 'blog.views.edit_post', name='edit_post'),
     url(r'^blog/delete_post/(?P<id>[\w-]+)/$', 'blog.views.delete_post', name='delete_post'),
     url(r'^blog/add_post/$', 'blog.views.add_post', name='add_post'),
+    
+    url(r'^api/post_list/$', 'api.views.post_list', name='post_list'),
+    url(r'^api/post/(?P<id>[\w-]+)/$', 'api.views.post', name='post')
 
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

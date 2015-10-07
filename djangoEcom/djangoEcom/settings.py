@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'order',
     'contact',
     'blog',
+    'api',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
