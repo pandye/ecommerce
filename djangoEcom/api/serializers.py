@@ -3,7 +3,7 @@ from blog.models import *
 
 
 class PostSerializer(serializers.ModelSerializer):
-    #author = serializers.RelatedField(read_only=True)
+    author = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Post
@@ -14,7 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validate_data):
         instance.id = validate_data.get('id', instance.id)
-        #instance.author = validate_data.get('author', instance.author)
+        instance.author = validate_data.get('author', instance.author)
         instance.title = validate_data.get('title', instance.title)
         instance.text = validate_data.get('text', instance.data)
         instance.save()
