@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'^blog/add_post/$', 'blog.views.add_post', name='add_post'),
     
     url(r'^api/post_list/$', 'api.views.post_list', name='post_list'),
-    url(r'^api/post/(?P<id>[\w-]+)/$', 'api.views.post', name='post')
+    url(r'^api/post_single/(?P<id>[\w-]+)/$', 'api.views.post_single', name='post_single')
 
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

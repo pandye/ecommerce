@@ -24,7 +24,7 @@ def post_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def post(request, id):
+def post_single(request, id):
     post = get_object_or_404(Post, id=id) 
     if request.method == 'GET':
         serializer = PostSerializer(post)
