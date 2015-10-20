@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework.urlpatterns import format_suffix_patterns
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'products.views.index', name='index'),
@@ -46,7 +48,12 @@ urlpatterns = [
     url(r'^blog/add_post/$', 'blog.views.add_post', name='add_post'),
     
     url(r'^api/post_list/$', 'api.views.post_list', name='post_list'),
-    url(r'^api/post_single/(?P<id>[\w-]+)/$', 'api.views.post_single', name='post_single')
+    url(r'^api/post_single/(?P<id>[\w-]+)/$', 'api.views.post_single', name='post_single'),
+
+    url(r'^api/product_list/$', 'api.views.product_list', name='product_list'),
+    url(r'^api/product_single/(?P<id>[\w-]+)/$', 'api.views.product_single', name='product_single'),
+
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -57,3 +64,4 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns = format_suffix_patterns(urlpatterns)
