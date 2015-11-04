@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from blog.models import * 
+from blog.models import User, Post 
 from products.models import Products
 
 
@@ -14,7 +14,6 @@ class PostSerializer(serializers.ModelSerializer):
         return Post.objects.create(**validate_data)
 
     def update(self, instance, validate_data):
-        instance.id = validate_data.get('id', instance.id)
         instance.author = validate_data.get('author', instance.author)
         instance.title = validate_data.get('title', instance.title)
         instance.text = validate_data.get('text', instance.text)
@@ -26,13 +25,12 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Products
-        fields = ['id', 'title', 'description', 'price']
+        fields = ['id', 'title', 'description', 'price', 'sale_price' ]
 
     def create(self, validate_data):
         return Products.objects.create(**validate_data)
 
     def update(self, instance, validate_data):
-        instance.id = validate_data.get('id', instance.id)
         instance.title = validate_data.get('title', instance.title)
         instance.description = validate_data.get('description', instance.description)
         instance.price = validate_data.get('price', instance.price)

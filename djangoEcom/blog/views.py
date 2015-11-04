@@ -7,7 +7,7 @@ from blog.forms import PostForm
 
 
 def blog(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.all() #filter(published_date__lte=timezone.now()).order_by('published_date')
     context = {'posts':posts}
     return render(request, 'blog/blog.html', context)
 

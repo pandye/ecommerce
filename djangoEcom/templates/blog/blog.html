@@ -5,7 +5,7 @@
 <div class="col-sm-12">
     <div class="blog-post-area">
         {% for post in posts %}
-        <div class="single-blog-post">
+          <div class="single-blog-post">
             <h2><a href="{% url 'post' post.id %}">{{ post.title }}</a></h2>
             <div class="post-meta">
                 <ul>
@@ -21,7 +21,9 @@
                 {% endif %}
             </div>
             <p>{{ post.text|linebreaks }}</p>
-        </div>
+          </div>
+        {% empty %}
+          <p><h1>There are no posts.</h1></p>  
         {% endfor %}
     </div>
 </div>

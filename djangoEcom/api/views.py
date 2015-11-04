@@ -14,8 +14,8 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 @authentication_classes((SessionAuthentication, BasicAuthentication))
 @permission_classes((IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly,))
 def post_list(request, format=None):
-    posts = Post.objects.all()
     if request.method == 'GET':
+        posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
@@ -49,8 +49,8 @@ def post_single(request, id, format=None):
 
 @api_view(['GET', 'POST'])
 def product_list(request, format=None):
-    products = Products.objects.all()
     if request.method == 'GET':
+        products = Products.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
@@ -68,7 +68,7 @@ def product_single(request, id, format=None):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = ProductSerializer(data=request.data)
+        serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
