@@ -4,16 +4,27 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from blog.models import Post
 from blog.forms import PostForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def blog(request):
-    posts = Post.objects.all() #filter(published_date__lte=timezone.now()).order_by('published_date')
+    post_list = Post.objects.all()
+    paginator = Paginator(post_list, 2)
+    page = request.GET.get('page')
+    
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    
     context = {'posts':posts}
     return render(request, 'blog/blog.html', context)
 
 
 def post(request, id):
-    post = Post.objects.get(id=id)
+    post = get_object_or_404(Post, id=id)
     context = {'post': post}
     return render(request, 'blog/post.html', context)
 

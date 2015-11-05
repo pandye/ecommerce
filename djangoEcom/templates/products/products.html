@@ -11,7 +11,7 @@
 						<h2 class="title text-center">Features Items</h2>
                             {% for product in products %}
                                 <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
+                                  <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
                                                 {% for img in product.productimage_set.all %}
@@ -32,12 +32,22 @@
                                 </div>
                             {% endfor %}
 
-						<ul class="pagination">
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">&raquo;</a></li>
-						</ul>
+                            <div class="pagination"><!--pagination-->
+                                <span class="step-links">
+                                    {% if products.has_previous %}
+                                        <a href="?page={{ products.previous_page_number }}">previous</a>
+                                    {% endif %}
+
+                                    <span class="current">
+                                        Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                                    </span>
+
+                                    {% if products.has_next %}
+                                        <a href="?page={{ products.next_page_number }}">next</a>
+                                    {% endif %}
+                                </span>
+                            </div><!--pagination-->
+
 					</div><!--features_items-->
 				</div>
 			</div>
