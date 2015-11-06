@@ -6,52 +6,49 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-9 padding-right">
+				<div class="col-sm-9">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
                             {% for product in products %}
-                                <div class="col-sm-4">
-                                  <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                {% for img in product.productimage_set.all %}
-                                                    <img src='{{ MEDIA_URL }}{{ img.image }}'>
-                                                {% endfor %}
-                                                <h2>{{ product.price }}</h2>
-                                                <p>{{ product.title }}</p>
-                                            </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>{{ product.price }}</h2>
-                                                    <p>{{ product.title }}</p>
-                                                    <p><a href="{% url 'prod' product.slug %}" class="btn btn-default">View</a></p>
-                                                </div>
-                                            </div>
+                                <a href="{% url 'prod' product.slug %}" 
+                                    <div class="col-sm-4">
+                                        <div class="productinfo text-center">
+                                            {% for img in product.productimage_set.all %}
+                                                <img src='{{ MEDIA_URL }}{{ img.image }}'>
+                                            {% endfor %}
+                                            <h2>{{ product.price }}</h2>
+                                            <p>{{ product.title }}</p>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
-
-                            <div class="pagination"><!--pagination-->
-                                <span class="step-links">
-                                    {% if products.has_previous %}
-                                        <a href="?page={{ products.previous_page_number }}">previous</a>
-                                    {% endif %}
-
-                                    <span class="current">
-                                        Page {{ products.number }} of {{ products.paginator.num_pages }}.
-                                    </span>
-
-                                    {% if products.has_next %}
-                                        <a href="?page={{ products.next_page_number }}">next</a>
-                                    {% endif %}
-                                </span>
-                            </div><!--pagination-->
-
 					</div><!--features_items-->
 				</div>
 			</div>
 		</div>
+
+
+        <nav><!--pagination-->
+          <ul class="pagination">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li>{% if products.has_previous %}
+                    <a href="?page={{ products.previous_page_number }}">previous</a>
+                {% endif %}</li>
+            <li>{% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}">next</a>
+                {% endif %}</li>
+            <li>
+              <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav><!--pagination-->
+
 	</section>
 
 {% endblock %}
