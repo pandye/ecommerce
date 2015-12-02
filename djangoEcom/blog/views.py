@@ -56,12 +56,12 @@ def edit_post(request, id):
                 post.published_date = timezone.now()
                 post.save()
             messages.success(request, "Post successfully edited.")
-            return redirect('blog')
+            return redirect('post', id=post.id)
         else:
             form = PostForm(instance=post)
     else:
         messages.error(request, "You are not a authenticated user.")
-        return redirect('blog')
+        return redirect('post', id=post.id)
     return render(request, 'blog/edit_post.html', {'form': form})
 
 

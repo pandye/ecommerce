@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from products.models import Products, ProductImage
+from products.models import Products, Category, SubCategory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
@@ -7,10 +7,12 @@ def index(request):
 
 
 def products(request):
+    categorys = Category.objects.all()
+
     product_list = Products.objects.all()
-    paginator = Paginator(product_list, 2)
+    paginator = Paginator(product_list, 4)
     page = request.GET.get('page')
-    print page
+    
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -20,15 +22,36 @@ def products(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         products = paginator.page(paginator.num_pages)
 
-    context = {'products': products}
+        
+    context = {'products': products, 'categorys': categorys}
     return render(request, 'products/products.html', context)
 
 
 def prod(request, slug):
     product = get_object_or_404(Products, slug=slug)
-    images = ProductImage.objects.filter(product=product)
-    context = {'product': product, 'images': images}
+    context = {'product': product}
     return render(request, 'products/prod.html', context)
+
+
+def category(request, slug):
+    categorys = Category.objects.all()
+
+    category = get_object_or_404(Category, slug=slug)
+    sub_cat = SubCategory.objects.filter(category=category)
+    products = Products.objects.filter(sub_category=sub_cat)
+    print category, sub_cat, products
+    context = {'categorys': categorys, 'products': products}
+    return render(request, 'products/products.html', context)
+
+
+def sub_cat(request, slug):
+    categorys = Category.objects.all()
+
+    sub_cat = get_object_or_404(SubCategory, slug=slug)
+    products = Products.objects.filter(sub_category=sub_cat)
+    print sub_cat, products
+    context = {'categorys':categorys, 'products': products}
+    return render(request, 'products/products.html', context)
 
 
 def search(request):

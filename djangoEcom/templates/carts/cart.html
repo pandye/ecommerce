@@ -17,7 +17,7 @@
 						<thead>
 							<tr class="cart_menu">
 								<td class="image">Item</td>
-								<td class="description"></td>
+								<td class="description">Description</td>
 								<td class="price">Price</td>
 								<td class="quantity">Quantity</td>
 								<td class="total">Total</td>
@@ -32,7 +32,7 @@
 	                                <td>{{ item.product.price }}</td>
 	                                <td>{{ item.quantity }}</td>
 	                                <td>{{ item.line_total}}</td>
-	                                <td><a class="cart_quantity_delete" href="{% url "remove" item.id %}"><i class="fa fa-times"></i></a></td>
+	                                <td><a class="delete" href="{% url "remove" item.id %}">Remove<i class="fa fa-times"></i></a></td>
 	                            </tr>
 	                        {% endfor %}
 	                    </tbody>

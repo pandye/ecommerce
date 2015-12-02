@@ -25,7 +25,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Products
-        fields = ['id', 'title', 'description', 'price', 'sale_price' ]
+        fields = ['id', 'title', 'description', 'price']
 
     def create(self, validate_data):
         return Products.objects.create(**validate_data)
@@ -34,7 +34,6 @@ class ProductSerializer(serializers.ModelSerializer):
         instance.title = validate_data.get('title', instance.title)
         instance.description = validate_data.get('description', instance.description)
         instance.price = validate_data.get('price', instance.price)
-        instance.sale_price = validate_data.get('sale_price', instance.sale_price)
         instance.save()
         return instance
 

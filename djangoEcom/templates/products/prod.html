@@ -36,9 +36,7 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-                                {% for img in product.productimage_set.all %}
-                                    <img src='{{ MEDIA_URL }}{{ img.image }}'>
-                                {% endfor %}
+                                    <img src='{{ MEDIA_URL }}{{ product.image }}'>
 								<h3>ZOOM</h3>
 							</div>
 						</div>

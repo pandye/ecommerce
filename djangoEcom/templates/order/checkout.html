@@ -1,9 +1,13 @@
 {% extends "base.html" %}
-
+{% load bootstrap %}
 {% block content %}
-    <form name="checkout" method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="submit">
-    </form>
+<div class="col-md-12">
+	<div class="col-md-6">
+	    <form name="checkout" method="post" action="">
+	        {% csrf_token %}
+	        {{ form|bootstrap }}
+	        <input type="submit" value="submit">
+	    </form>
+	</div>
+</div>
 {% endblock %}

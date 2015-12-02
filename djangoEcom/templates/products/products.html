@@ -1,54 +1,88 @@
 {% extends "base.html" %}
 {% block title %}products{% endblock %}
 
+{% block jquery %}
+
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+
+{% endblock %}
+
 {% block content %}
 
-	<section>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-9">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Features Items</h2>
-                            {% for product in products %}
-                                <a href="{% url 'prod' product.slug %}" 
-                                    <div class="col-sm-4">
-                                        <div class="productinfo text-center">
-                                            {% for img in product.productimage_set.all %}
-                                                <img src='{{ MEDIA_URL }}{{ img.image }}'>
-                                            {% endfor %}
-                                            <h2>{{ product.price }}</h2>
-                                            <p>{{ product.title }}</p>
-                                        </div>
-                                    </div>
-                                </a>
+<div class="col-md-12">
+    <div class="col-md-3">
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+
+                {% for category in categorys %}
+                    <div class="panel-heading">
+                        <h4 class="panel-title">        
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{category.name}}">{{ category }}</a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                    
+                    <div id="{{category.name}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {% for sub in category.subcategory_set.all %}
+                                <p><a href="{% url 'sub_cat' sub.slug %}">{{ sub }}</a></p>
                             {% endfor %}
-					</div><!--features_items-->
-				</div>
-			</div>
-		</div>
+                        </div>
+                    </div>
+                {% endfor %}
 
+            </div>
+        </div>
 
-        <nav><!--pagination-->
-          <ul class="pagination">
-            <li>
-              <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li>{% if products.has_previous %}
-                    <a href="?page={{ products.previous_page_number }}">previous</a>
-                {% endif %}</li>
-            <li>{% if products.has_next %}
-                    <a href="?page={{ products.next_page_number }}">next</a>
-                {% endif %}</li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav><!--pagination-->
+    </div>
 
-	</section>
+	<div class="col-md-9">
+		<div class="features_items"><!--features_items-->
+
+			<h2 class="title text-center">Products</h2>
+                {% for product in products %}
+                    <a href="{% url 'prod' product.slug %}" 
+                        <div class="col-md-4">
+                            <div class="productinfo text-center">
+                                    <img src='{{ MEDIA_URL }}{{ product.image }}'>
+                                <h2>{{ product.price }}</h2>
+                                <p>{{ product.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+
+                <nav><!--pagination-->
+                  <ul class="pagination">
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li>{% if products.has_previous %}
+                            <a href="?page={{ products.previous_page_number }}">previous</a>
+                        {% endif %}</li>
+                    <li>{% if products.has_next %}
+                            <a href="?page={{ products.next_page_number }}">next</a>
+                        {% endif %}</li>
+                    <li>
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav><!--pagination-->
+                
+		</div><!--features_items-->
+    </div>
+
+</div>
 
 {% endblock %}

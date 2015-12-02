@@ -1,10 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, Http404, get_object_or_404
 from django.core.urlresolvers import reverse
-from products.models import Products, Variation
+from products.models import Products
 from carts.models import CartItem, Cart
 from django.http import JsonResponse
 import json
-
 
 def cart(request):
     request.session.set_expiry(0)
