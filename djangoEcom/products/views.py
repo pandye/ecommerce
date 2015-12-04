@@ -3,14 +3,16 @@ from products.models import Products, Category, SubCategory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
-    return render(request, 'index.html')
+    categorys = Category.objects.all()
+    context = {'categorys': categorys}
+    return render(request, 'index.html', context)
 
 
 def products(request):
     categorys = Category.objects.all()
 
     product_list = Products.objects.all()
-    paginator = Paginator(product_list, 4)
+    paginator = Paginator(product_list, 6)
     page = request.GET.get('page')
     
     try:
@@ -22,7 +24,8 @@ def products(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         products = paginator.page(paginator.num_pages)
 
-        
+    print categorys
+    print products
     context = {'products': products, 'categorys': categorys}
     return render(request, 'products/products.html', context)
 

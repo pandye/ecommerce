@@ -24,6 +24,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'products.views.index', name='index'),
+    
     url(r'^products/$', 'products.views.products', name='products'),
     url(r'^product/(?P<slug>[\w-]+)/$', 'products.views.prod', name='prod'),
     url(r'^category/(?P<slug>[\w-]+)/$', 'products.views.category', name='category'),
@@ -31,7 +32,6 @@ urlpatterns = [
     url(r'^s/$', 'products.views.search', name='search'),
 
     url(r'cart/$', 'carts.views.cart', name='cart'),
-    url(r'cart/(?P<slug>[\w-]+)/$', 'carts.views.add', name='add'),
     url(r'add_ajax/$', 'carts.views.add_ajax', name='add_ajax'),
     url(r'remove/(?P<id>[\w-]+)/$', 'carts.views.remove', name='remove'),
 

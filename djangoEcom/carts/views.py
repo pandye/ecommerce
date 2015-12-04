@@ -43,74 +43,21 @@ def add_ajax(request):
             id = new_cart.id
 
         slug = request.POST['slug']
+        qty = request.POST['qty']
+        
         cart = get_object_or_404(Cart, id=id)
         product = get_object_or_404(Products, slug=slug)
 
-        product_var = []
-        qty = request.POST['qty']
-        for item in request.POST:
-            category = item
-            title = request.POST[category]
-            try:
-                v = Variation.objects.filter(product=product, category=category, title=title)
-                product_var.append(v)
-            except:
-                pass
-
         cart_item = CartItem.objects.create(cart=cart, product=product)
         cart_item.save()
-
-        if len(product_var) > 0:
-            cart_item.quantity = qty
-            cart_item.line_total = int(cart_item.quantity) * int(cart_item.product.price)
-            cart_item.save()
-
-            request.session['cart_items'] = len(cart.cartitem_set.all())
-
-            response_data = len(cart.cartitem_set.all())
-            print response_data
-            return HttpResponse(json.dumps(response_data), content_type='application/json')
-    else:
-        return HttpResponse(
-            json.dumps({"nothing to see": "this isn't happening"}),
-            content_type="application/json"
-        )
-
-
-def add(request, slug):
-    try:
-        id = request.session['cart_id']
-    except:
-        new_cart = Cart()
-        new_cart.save()
-        request.session['cart_id'] = new_cart.id
-        id = new_cart.id
-
-    cart = get_object_or_404(Cart, id=id)
-    product = get_object_or_404(Products, slug=slug)
-
-    product_var = []
-    if request.method == 'POST':
-        qty = request.POST['qty']
-        for item in request.POST:
-            category = item
-            title = request.POST[category]
-            try:
-                v = Variation.objects.filter(product=product, category=category, title=title)
-                product_var.append(v)
-            except:
-                pass
-
-        cart_item = CartItem.objects.create(cart=cart, product=product)
+        cart_item.quantity = qty
+        cart_item.line_total = int(cart_item.quantity) * int(cart_item.product.price)
         cart_item.save()
 
-        if len(product_var) > 0:
-            cart_item.quantity = qty
-            cart_item.line_total = int(cart_item.quantity) * int(cart_item.product.price)
-            cart_item.save()
-
-        return HttpResponseRedirect(reverse('cart'))
-    raise Http404
+        request.session['cart_items'] = len(cart.cartitem_set.all())
+        response_data = len(cart.cartitem_set.all())
+        print response_data
+        return HttpResponse(json.dumps(response_data), content_type='application/json')
 
 
 def remove(request, id):

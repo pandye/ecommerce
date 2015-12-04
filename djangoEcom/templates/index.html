@@ -2,13 +2,44 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    
-    <section>
-		<div class="container">
-			<div class="row">
-				
-			</div>
+
+<div class="col-md-12">
+
+	{% for category in categorys %}
+		<div class="col-md-9 pull-right">
+        	<h2><p class="bg-primary">{{ category }}</p></h2>
+        	<div class="col-md-12" style="margin-bottom:50px;"> 
+		        {% for sub in category.subcategory_set.all %}
+		            {% for product in sub.products_set.all|slice:":1" %}
+		            	<div class="col-md-4">
+		                    <img src="{{ MEDIA_URL }}{{ product.image }}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+		                    <h2>{{ product.price }}</h2>
+		                    	{{ product.title }}
+		                </div>
+		            {% endfor %}
+		        {% endfor %}
+	    	</div>
 		</div>
-	</section>
+	{% endfor %}
+
+
+	{% for category in categorys %}
+		<div class="col-md-9 pull-right">
+		    {% for sub in category.subcategory_set.all %}
+        		<div class="col-md-12" style="margin-bottom:50px;"> 
+        			<h2><p class="bg-primary">{{ sub }}</p></h2>
+		            {% for product in sub.products_set.all %}
+		            	<div class="col-md-4">
+		                    <img src="{{ MEDIA_URL }}{{ product.image }}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+		                    <h2>{{ product.price }}</h2>
+		                    	{{ product.title }}
+		                </div>
+		            {% endfor %}
+	    		</div>
+		    {% endfor %}
+		</div>
+	{% endfor %}
+
+</div>
 
 {% endblock %}
