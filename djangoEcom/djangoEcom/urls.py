@@ -27,7 +27,7 @@ urlpatterns = [
     
     url(r'^products/$', 'products.views.products', name='products'),
     url(r'^product/(?P<slug>[\w-]+)/$', 'products.views.prod', name='prod'),
-    url(r'^product/rating/(?P<pk>[\w-]+)/$', 'products.views.rating', name='rating'),
+    url(r'^prod/rating/$', 'products.views.rating', name='rating'),
     url(r'^category/(?P<slug>[\w-]+)/$', 'products.views.category', name='category'),
     url(r'^category/sub_cat/(?P<slug>[\w-]+)/$', 'products.views.sub_cat', name='sub_cat'),
     url(r'^s/$', 'products.views.search', name='search'),

@@ -1,0 +1,36 @@
+.raterater-bg-layer {
+    color: rgb( 204, 204, 204 );
+}
+.raterater-hover-layer {
+    color: rgb( 255, 255, 0 );
+}
+.raterater-hover-layer.rated { /* after the user selects a rating */
+    color: rgba( 255, 255, 0, 1 );
+}
+.raterater-rating-layer {
+    color: rgb( 255, 255, 0);
+}
+.raterater-outline-layer {
+    color: rgba( 204, 204, 204,0.01);
+}
+
+/* don't change these - you might break something.. */
+.raterater-wrapper {
+    overflow:visible;
+}
+.raterater-layer,
+.raterater-layer i {
+    display: block;
+    position: absolute;
+    overflow: visible;
+    top: 0px;
+    left: 0px;
+}
+.raterater-hover-layer {
+    display: none;
+}
+.raterater-hover-layer i,
+.raterater-rating-layer i {
+    width: 0px;
+    overflow: hidden;
+}

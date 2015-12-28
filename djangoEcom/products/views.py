@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from products.models import Products, Category, SubCategory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import json
 
 def index(request):
     categorys = Category.objects.all()
@@ -34,6 +35,19 @@ def prod(request, slug):
     product = get_object_or_404(Products, slug=slug)
     context = {'product': product}
     return render(request, 'products/prod.html', context)
+
+
+def rating(request):
+    if request.is_ajax() and request.POST:
+        slug = request.POST['slug']
+        product = get_object_or_404(Products, slug=slug)
+        product_rate =  product.rating
+        rate = request.POST['rate']
+        new_rating = round(((product_rate+float(rate))/2), 1)
+        product.rating = new_rating
+        product.save()
+        response_data = new_rating
+        return HttpResponse(json.dumps(response_data), content_type='application/json')
 
 
 def category(request, slug):

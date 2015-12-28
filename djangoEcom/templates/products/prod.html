@@ -2,6 +2,7 @@
 {% block title %}product{% endblock %}
 
 {% block jquery %}
+
     $(".add_to_cart_btn").click(function(e){
         e.preventDefault();
         $.ajax({
@@ -26,6 +27,33 @@
             }
         });
     });
+
+    $('#rating-id').on('rating.change', function(e) {
+        e.preventDefault();
+        $.ajax({
+
+            url: '{% url 'rating' %}',
+            type: 'POST',
+            data:{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                slug: $('#id_slug').val(),
+                rate: $('.rating').val()
+            },
+            dataType: 'json',
+
+            success: function(data){
+                alert('Thank You For Rating\nNew Rating Is:' +data);
+                $('.rating').rating('update', data);
+                console.log(data);
+            },
+
+            error: function(e){
+                alert('Some error occured');
+            }
+
+        });
+    });
+
 {% endblock %}
 
 {% block content %}
@@ -45,36 +73,36 @@
 								<h1>{{ product.title }}</h1>
 								<span>
 									<span>{{ product.price }}</span>
+                                        
+                                    <input type='hidden' name='slug' id='id_slug' value='{{product.slug }}'/>
 
-                                    <form class="cartForm" method="post" action="{% url "prod" product.slug %}">{% csrf_token %}
-                                        <label>Quantity:</label>
+                                    <input id="rating-id" value="{{ product.rating }}" type="number" class="rating" min=0 max=5 step=0.5 data-size="sm">
 
-                                        <input type='hidden' name='slug' id='id_slug' value='{{product.slug }}'/>
+                                    <label>Quantity:</label>
 
-                                        <input type='number' name='qty' id='id_quantity' value='1' placeholder='Qty' required='required'/>
+                                    <input type='number' name='qty' id='id_quantity' value='1' placeholder='Qty' required='required'/>
 
-                                        <button type="submit" class="btn btn-primary add_to_cart_btn"><i class="fglyphicon glyphicon-shopping-cart"></i>Add to cart</button>
+                                    <button type="submit" class="btn btn-primary add_to_cart_btn"><i class="glyphicon glyphicon-shopping-cart"></i>Add to cart</button>
 
-                                        {% if product.variation_set.all %}
+                                    {% if product.variation_set.all %}
 
-                                            {% if product.variation_set.sizes %}
-                                                <select class='form-control' name='size'>
-                                                    {% for item in product.variation_set.sizes %}
-                                                        <option value='{{ item.title|lower }}'>{{ item.title|capfirst }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            {% endif %}
-
-                                            {% if product.variation_set.colors %}
-                                                <select class='form-control' name='color'>
-                                                    {% for item in product.variation_set.colors %}
-                                                        <option value='{{ item.title|lower }}'>{{ item.title|capfirst }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            {% endif %}
-
+                                        {% if product.variation_set.sizes %}
+                                            <select class='form-control' name='size'>
+                                                {% for item in product.variation_set.sizes %}
+                                                    <option value='{{ item.title|lower }}'>{{ item.title|capfirst }}</option>
+                                                {% endfor %}
+                                            </select>
                                         {% endif %}
-                                    </form>
+
+                                        {% if product.variation_set.colors %}
+                                            <select class='form-control' name='color'>
+                                                {% for item in product.variation_set.colors %}
+                                                    <option value='{{ item.title|lower }}'>{{ item.title|capfirst }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        {% endif %}
+
+                                    {% endif %}
 
 								</span>
 								<p><b>Availability:</b></p>
@@ -87,4 +115,5 @@
 			</div>
 		</div>
 	</section>
+
 {% endblock %}

@@ -25,6 +25,7 @@ class Products(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=65)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to='shop')
+    rating = models.FloatField(max_length=1, default=0, blank=True)
 
     def __str__(self):
         return self.title

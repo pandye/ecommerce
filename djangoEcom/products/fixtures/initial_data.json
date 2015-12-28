@@ -1,1 +1,119 @@
-[{"fields": {"name": "Men", "slug": "m"}, "model": "products.category", "pk": 2}, {"fields": {"name": "Women", "slug": "w"}, "model": "products.category", "pk": 3}, {"fields": {"category": 2, "name": "Clothing", "slug": "cl"}, "model": "products.subcategory", "pk": 1}, {"fields": {"category": 2, "name": "Footware", "slug": "foo"}, "model": "products.subcategory", "pk": 2}, {"fields": {"category": 3, "name": "Jewellery", "slug": "je"}, "model": "products.subcategory", "pk": 3}, {"fields": {"category": 2, "name": "Accessories", "slug": "access"}, "model": "products.subcategory", "pk": 4}, {"fields": {"sub_category": 1, "title": "T-Shirt", "price": "123.00", "slug": "t", "image": "shop/product2_PCk6NW6_F2QTtcE.jpg", "description": "vkwhwklvlkwlwlnwlkvlwknvnwlnl"}, "model": "products.products", "pk": 1}, {"fields": {"sub_category": 1, "title": "Jeans", "price": "456.00", "slug": "je", "image": "shop/product12_j4pTWXP.jpg", "description": "jgwdkjvwkvhkwvhljwhkvbwjlbhwlbwh"}, "model": "products.products", "pk": 2}, {"fields": {"sub_category": 2, "title": "shoes", "price": "456.00", "slug": "s", "image": "shop/product2_BNa2tzn_3Tap04U.jpg", "description": "vjhjblvblkvlwevwlevwn"}, "model": "products.products", "pk": 3}, {"fields": {"sub_category": 3, "title": "Rings", "price": "4550.00", "slug": "gg", "image": "shop/partner1.png", "description": "wnkvwvwvnwedvwhvcjwhcjkwvkcwvkw"}, "model": "products.products", "pk": 4}, {"fields": {"sub_category": 4, "title": "Watch", "price": "1000.00", "slug": "wa", "image": "shop/product11_zxA7FYg.jpg", "description": "cdvnkvnklenvklenvkljnefjvnej"}, "model": "products.products", "pk": 5}]
+[
+{
+    "fields": {
+        "name": "Men",
+        "slug": "m"
+    },
+    "model": "products.category",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "Women",
+        "slug": "w"
+    },
+    "model": "products.category",
+    "pk": 3
+},
+{
+    "fields": {
+        "category": 2,
+        "name": "Clothing",
+        "slug": "cl"
+    },
+    "model": "products.subcategory",
+    "pk": 1
+},
+{
+    "fields": {
+        "category": 2,
+        "name": "Footware",
+        "slug": "foo"
+    },
+    "model": "products.subcategory",
+    "pk": 2
+},
+{
+    "fields": {
+        "category": 3,
+        "name": "Jewellery",
+        "slug": "je"
+    },
+    "model": "products.subcategory",
+    "pk": 3
+},
+{
+    "fields": {
+        "category": 2,
+        "name": "Accessories",
+        "slug": "access"
+    },
+    "model": "products.subcategory",
+    "pk": 4
+},
+{
+    "fields": {
+        "rating": 0.0,
+        "sub_category": 1,
+        "title": "T-Shirt",
+        "price": "123.00",
+        "slug": "t",
+        "image": "shop/product2_PCk6NW6_F2QTtcE.jpg",
+        "description": "vkwhwklvlkwlwlnwlkvlwknvnwlnl"
+    },
+    "model": "products.products",
+    "pk": 1
+},
+{
+    "fields": {
+        "rating": 0.0,
+        "sub_category": 1,
+        "title": "Jeans",
+        "price": "456.00",
+        "slug": "je",
+        "image": "shop/product12_j4pTWXP.jpg",
+        "description": "jgwdkjvwkvhkwvhljwhkvbwjlbhwlbwh"
+    },
+    "model": "products.products",
+    "pk": 2
+},
+{
+    "fields": {
+        "rating": 0.0,
+        "sub_category": 2,
+        "title": "shoes",
+        "price": "456.00",
+        "slug": "s",
+        "image": "shop/product2_BNa2tzn_3Tap04U.jpg",
+        "description": "vjhjblvblkvlwevwlevwn"
+    },
+    "model": "products.products",
+    "pk": 3
+},
+{
+    "fields": {
+        "rating": 0.0,
+        "sub_category": 3,
+        "title": "Rings",
+        "price": "4550.00",
+        "slug": "gg",
+        "image": "shop/partner1.png",
+        "description": "wnkvwvwvnwedvwhvcjwhcjkwvkcwvkw"
+    },
+    "model": "products.products",
+    "pk": 4
+},
+{
+    "fields": {
+        "rating": 0.0,
+        "sub_category": 4,
+        "title": "Watch",
+        "price": "1000.00",
+        "slug": "wa",
+        "image": "shop/product11_zxA7FYg.jpg",
+        "description": "cdvnkvnklenvklenvkljnefjvnej"
+    },
+    "model": "products.products",
+    "pk": 5
+}
+]

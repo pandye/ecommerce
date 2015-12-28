@@ -2,7 +2,7 @@
 {% block title %}Cart{% endblock %}
 {% block content %}
 	{% if empty %}
-	    <h1 style=' text-align:center;'>{{ empty_message }}</h1>
+	    <h1 style=' text-align:center;'><a href="{% url 'index' %}">{{ empty_message }}</a></h1>
 	{% else %}
 	    <section id="cart_items">
 			<div class="container">

@@ -12,9 +12,11 @@
 		        {% for sub in category.subcategory_set.all %}
 		            {% for product in sub.products_set.all|slice:":1" %}
 		            	<div class="col-md-4">
-		                    <img src="{{ MEDIA_URL }}{{ product.image }}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
-		                    <h2>{{ product.price }}</h2>
+		            	    <a href="{% url 'prod' product.slug %}"> 
+			                    <img src="{{ MEDIA_URL }}{{ product.image }}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+		                    	<h2>{{ product.price }}</h2>
 		                    	{{ product.title }}
+		                    </a>
 		                </div>
 		            {% endfor %}
 		        {% endfor %}
@@ -30,9 +32,11 @@
         			<h2><p class="bg-primary">{{ sub }}</p></h2>
 		            {% for product in sub.products_set.all %}
 		            	<div class="col-md-4">
-		                    <img src="{{ MEDIA_URL }}{{ product.image }}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
-		                    <h2>{{ product.price }}</h2>
-		                    	{{ product.title }}
+		            		<a href="{% url 'prod' product.slug %}"> 
+		                    	<img src="{{ MEDIA_URL }}{{ product.image }}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+		                    	<h2>{{ product.price }}</h2>
+		                    		{{ product.title }}
+		                    </a>		
 		                </div>
 		            {% endfor %}
 	    		</div>
