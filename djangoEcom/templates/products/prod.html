@@ -18,7 +18,7 @@
 
             success: function(data){
                 $(".cart_badge_info").text(data);
-                $(".add_to_cart_btn").delay(250).fadeIn("slow").delay(100).fadeOut("slow");
+                $(".add_to_cart_btn").attr('disabled', true).text('Item Added');
 
             },
 
