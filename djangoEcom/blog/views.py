@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib import messages
 from blog.models import Post
 from blog.forms import PostForm
@@ -75,4 +75,20 @@ def delete_post(request, id):
     else:
         messages.error(request, "You are not a authenticated user.")
         return redirect('post', id=post.id)
+
+
+def likes(request):
+    if request.is_ajax() and request.POST:
+        id = request.POST['like_id']
+        post = get_object_or_404(Post, id=id)
+
+        likes = post.likes
+
+        new_like = likes + 1
+        post.likes = new_like
+        post.save()
+
+        print new_like
+        return HttpResponse(new_like)
+
 

@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'djangoEcom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'decom',
+        'NAME': 'ecom',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
