@@ -32,4 +32,4 @@ class AddressForm(forms.ModelForm):
 
     class Meta:
         model = Address
-        fields = ['address', 'address1', 'state', 'country']    
+        fields = ['address', 'address1', 'country', 'state', 'city']

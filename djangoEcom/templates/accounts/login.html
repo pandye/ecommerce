@@ -3,21 +3,19 @@
 {% block title %}home{% endblock %}
 {% block content %}
 
-<form class="form" method="post" action="">
-    <div class="col-md-12">
-        <div class="col-md-6">{% csrf_token %}
+<div class="col-md-12">
+    <div class="col-md-6">
+        <form name="login" method="post" action="">
+            <legend>Login</legend>
+            {% csrf_token %}
             {{ form|bootstrap }}
             <input type="hidden" name="next" value="{{ next }}"/>
-        </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+              New user?<a href="{% url 'register' %}">Click here to register</a>
+            </div>
+        </form>
     </div>
-
-    <div class="col-md-12">
-        <div class="col-md-6">
-            <button type="submit" class="btn btn-primary">Sign in</button>
-            New user?<a href="{% url 'register' %}">Click here to register</a>
-        </div>
-    </div>
-
-</form>
+</div>
 
 {% endblock %}
