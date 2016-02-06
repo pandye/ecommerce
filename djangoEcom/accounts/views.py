@@ -37,7 +37,7 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 messages.success(request, "You are successfully logged in.")
-                return redirect('index')
+                return redirect(request.GET.get('next', 'index'))
             else:
                 messages.error(request, "Your account is disabled.")
         else:
